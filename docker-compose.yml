@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  mongodbintegrationservice:
+    image: ppmcag.azurecr.io/mongodbintegrationservice:test01
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 5002:80
+    environment:
+      - MONGO_URI=mongodb+srv://user:96v2WKFOI0gdHABJ@cluster-test.ckwdejy.mongodb.net/?retryWrites=true&w=majority
+      - DATABASE_NAME=BAI_TEST_DB
+      - SECRET_KEY=mysecretkey
+      - DEBUG=False
