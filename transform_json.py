@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 def transform_json(data):
     try:
@@ -20,6 +21,7 @@ def transform_json(data):
         # Das resultierende Dictionary zurück in einen JSON-String umwandeln
         items = data[first_key]
         for item in items:
+            item["__ingest_timestamp"] = datetime.now()
             for key in item:
                 if isinstance(item[key], dict):
                     item[key] = [item[key]]

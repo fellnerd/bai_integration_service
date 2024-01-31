@@ -1,9 +1,10 @@
 import os
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
 from flask_cors import CORS
 from flask_pymongo import PyMongo
 from transform_json import transform_json
 from dotenv import load_dotenv
+from datetime import datetime
 
 # Load environment variables from .env file
 load_dotenv()
@@ -45,9 +46,21 @@ def create_app(config=None):
             # Select the database and collection dynamically
             db = mongo.cx[app.config['DATABASE_NAME']]
             collection = db[category]
+            
+            
+            metric_collection = db["bai_metric"]
 
             # Insert data into MongoDB
             result = collection.insert_many(data)
+            try:
+                if result.acknowledged:
+                    metric_collection.insert_one({
+                        "timestamp": datetime.now(),
+                        "collection": category,
+                        "total_items": len(data)
+                    })
+            except:
+                return Response(status=500)
             return jsonify({"message": "Data stored", "id": str(result.inserted_ids)})
 
         except Exception as e:
