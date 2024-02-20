@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  mongodbintegrationservice:
+    image: zindel.azurecr.io/mongodbintegrationservice:latest-test
+    container_name: ppmcag_logbau_test
+    environment:
+      - MONGO_URI=mongodb+srv://user:96v2WKFOI0gdHABJ@cluster-test.ckwdejy.mongodb.net/?retryWrites=true&w=majority
+      - DATABASE_NAME=BAI_TEST_DB
+      - SECRET_KEY=mysecretkey
+      - DEBUG=False
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mongodbintegrationservice.rule=Host(`ppmcag-logbau.tnet.srv-dev01.local`)"  # Use a hostname
+      - "traefik.http.services.mongodbintegrationservice.loadbalancer.server.port=8000"
+    networks:
+      t-traefik-net:
+        ipv4_address: 10.0.6.3
+
+networks:
+  t-traefik-net:
+    external: true

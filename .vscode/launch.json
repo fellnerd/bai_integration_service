@@ -12,7 +12,9 @@
             },
             "envFile": "${workspaceFolder}/.env",
             "args": [
-                "run"
+                "run",
+                "--port",
+                "8010"
             ],
             "jinja": true,
             "justMyCode": true

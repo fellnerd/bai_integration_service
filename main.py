@@ -31,7 +31,7 @@ def create_app(config=None):
     # Route Definitions
     @app.route("/")
     def hello_world():
-        return "Service is up and running."
+        return "Service is up and running. Version: latest-test"
 
     @app.route("/api/ingest", methods=["POST"])
     def ingest_data():
