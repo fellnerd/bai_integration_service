@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   mongodbintegrationservice:
-    image: zindel.azurecr.io/mongodbintegrationservice:latest-test
+    image: zindel.azurecr.io/mongodbintegrationservice:latest-prod
     build:
       context: .
       dockerfile: ./Dockerfile
