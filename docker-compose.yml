@@ -2,14 +2,14 @@ version: '3.4'
 
 services:
   mongodbintegrationservice:
-    image: zindel.azurecr.io/mongodbintegrationservice:latest-prod
+    image: ppmcag.azurecr.io/mongodbintegrationservice:latest
     build:
       context: .
       dockerfile: ./Dockerfile
     ports:
-      - 5002:80
+      - 8002:8000
     environment:
-      - MONGO_URI=mongodb+srv://user:96v2WKFOI0gdHABJ@cluster-test.ckwdejy.mongodb.net/?retryWrites=true&w=majority
-      - DATABASE_NAME=BAI_TEST_DB
+      - MONGO_URI=mongodb+srv://user:96v2WKFOI0gdHABJ@cluster-test.ckwdejy.mongodb.net/
+      - DATABASE_NAME=BAI_PROD_DB
       - SECRET_KEY=mysecretkey
       - DEBUG=False
