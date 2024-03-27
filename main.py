@@ -14,7 +14,7 @@ def create_app(config=None):
 
     # Flask Configuration
     app.config.from_mapping(
-        DEBUG=os.environ.get('DEBUG', 'False').lower() in ['true', '1', 't'],
+        DEBUG=os.environ.get('DEBUG', 'True').lower() in ['true', '1', 't'],
         MONGO_URI=os.environ.get('MONGO_URI', "mongodb://localhost:27017"),
         DATABASE_NAME=os.environ.get('DATABASE_NAME', 'BAI_PROD_DB')
         # ... any other configuration
