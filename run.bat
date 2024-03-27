@@ -27,9 +27,7 @@ echo Installing dependencies from requirements.txt...
 .venv\Scripts\python.exe -m pip install --upgrade pip
 .venv\Scripts\python -m pip install -r requirements.txt
 
-set "FLASK_APP=main.py"
-set "MONGO_URI=mongodb://localhost:27017"
-set "DATABASE_NAME=BAI_PROD_DB"
+
 call .venv\Scripts\python -m flask run
 
 echo Flask application has stopped. Press any key to close this window.
