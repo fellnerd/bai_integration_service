@@ -28,7 +28,7 @@ echo Installing dependencies from requirements.txt...
 .venv\Scripts\python -m pip install -r requirements.txt
 
 
-call .venv\Scripts\python -m flask run
+call .venv\Scripts\python -m main.py
 
 echo Flask application has stopped. Press any key to close this window.
 pause > nul
