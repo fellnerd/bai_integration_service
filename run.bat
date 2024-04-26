@@ -18,9 +18,11 @@ IF ERRORLEVEL 1 (
 
 cd /d %repoPath%
 
+SET "pythonPath=C:\Users\Administrator\AppData\Local\Programs\Python\Python312\python.exe"
+
 IF NOT EXIST ".venv" (
     echo Setting up the virtual environment...
-    python -m venv .venv
+    "%pythonPath%" -m venv .venv
 )
 
 echo Installing dependencies from requirements.txt...
