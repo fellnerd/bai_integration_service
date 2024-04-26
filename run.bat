@@ -18,7 +18,7 @@ IF ERRORLEVEL 1 (
 
 cd /d %repoPath%
 
-SET "pythonPath=C:\Users\Administrator\AppData\Local\Programs\Python\Python312\python.exe"
+SET "pythonPath=C:\Users\QlikSenseAdmin\AppData\Local\Programs\Python\Python312\python.exe"
 
 IF NOT EXIST ".venv" (
     echo Setting up the virtual environment...
