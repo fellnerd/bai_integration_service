@@ -1,7 +1,7 @@
 @echo off
-SET "repoPath=C:\bai_integration_service"
+SET "repoPath=C:\bai_integration_service_kies"
 SET "repoURL=https://github.com/fellnerd/bai_integration_service.git"
-SET "branchName=ssk-win"
+SET "branchName=ssk-win-kies"
 
 IF EXIST "%repoPath%" (
     echo Removing existing directory at %repoPath%...
@@ -18,7 +18,7 @@ IF ERRORLEVEL 1 (
 
 cd /d %repoPath%
 
-SET "pythonPath=C:\Users\Administrator\AppData\Local\Programs\Python\Python312\python.exe"
+SET "pythonPath=C:\Users\QlikSenseAdmin\AppData\Local\Programs\Python\Python312\python.exe"
 
 IF NOT EXIST ".venv" (
     echo Setting up the virtual environment...
