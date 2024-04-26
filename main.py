@@ -15,7 +15,7 @@ def create_app(config=None):
     # Flask Configuration
     app.config.from_mapping(
         DEBUG=os.environ.get('DEBUG', 'True').lower() in ['true', '1', 't'],
-        MONGO_URI="mongodb://10.0.0.51:27017/",
+        MONGO_URI="mongodb://localhost:27017/",
         DATABASE_NAME='BAI_PROD_DB'
         # ... any other configuration
     )
@@ -72,4 +72,4 @@ def create_app(config=None):
 app = create_app()
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=5001)
