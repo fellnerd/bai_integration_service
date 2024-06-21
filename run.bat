@@ -1,5 +1,5 @@
 @echo off
-SET "repoPath=C:\bai_integration_service_kies"
+SET "repoPath=C:\bai_integration_service_beton"
 SET "repoURL=https://github.com/fellnerd/bai_integration_service.git"
 SET "branchName=ssk-win-beton-01"
 
