@@ -23,5 +23,5 @@ def update_schema(schema_collection, schema_name, new_schema):
 def apply_schema_defaults(item, schema):
     for key in schema:
         if key not in item:
-            item[key] = None
+            item[key] = ""
     return item
