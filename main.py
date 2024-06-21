@@ -2,6 +2,7 @@ import os
 from flask import Flask, jsonify, request, Response
 from flask_cors import CORS
 from flask_pymongo import PyMongo
+from schema_handler import apply_schema_defaults, update_schema
 from transform_json import transform_json
 from dotenv import load_dotenv
 from datetime import datetime
@@ -41,27 +42,32 @@ def create_app(config=None):
             if data is None:
                 return jsonify({"error": "Invalid data"}), 400
 
-            category, data = transform_json(data)
+            category, data, schema = transform_json(data)
+            if category is None:
+                return jsonify({"error": data}), 400
 
             # Select the database and collection dynamically
             db = mongo.cx[app.config['DATABASE_NAME']]
             collection = db[category]
-            
-            
+            schema_collection = db["SCHEMAS"]
             metric_collection = db["bai_metric"]
+
+            # Update schema if necessary and get the current schema
+            schema_name = f"{category}__SCHEMA"
+            current_schema = update_schema(schema_collection, schema_name, schema)
+
+            # Apply schema defaults to each item
+            data = [apply_schema_defaults(item, current_schema) for item in data]
 
             # Insert data into MongoDB
             result = collection.insert_many(data)
-            try:
-                if result.acknowledged:
-                    metric_collection.insert_one({
-                        "timestamp": datetime.now(),
-                        "collection": category,
-                        "total_items": len(data)
-                    })
-            except:
-                return Response(status=500)
-            return jsonify({"message": "Data stored", "id": str(result.inserted_ids)})
+            if result.acknowledged:
+                metric_collection.insert_one({
+                    "timestamp": datetime.now(),
+                    "collection": category,
+                    "total_items": len(data)
+                })
+                return jsonify({"message": "Data stored", "id": str(result.inserted_ids)})
 
         except Exception as e:
             app.logger.error(f"An error occurred: {str(e)}")

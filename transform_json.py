@@ -3,30 +3,33 @@ from datetime import datetime
 
 def transform_json(data):
     try:
-        # JSON-String in ein Python-Dictionary umwandeln
+        # Convert JSON string to a Python dictionary
+        if isinstance(data, str):
+            data = json.loads(data)
         
-        
-        # Überprüfen, ob das Dictionary nicht leer ist
+        # Check if the dictionary is not empty
         if not data:
-            return None
+            return None, None, None
         
-        # Den ersten Schlüssel des Dictionaries herausfinden
+        # Get the first key of the dictionary
         first_key = next(iter(data))
         
-        # Überprüfen, ob der Wert ein Dictionary ist
+        # Check if the value is a dictionary
         if isinstance(data[first_key], dict):
-            # Wenn ja, in eine Liste umwandeln
+            # If so, convert it to a list
             data[first_key] = [data[first_key]]
         
-        # Das resultierende Dictionary zurück in einen JSON-String umwandeln
+        # Generate the schema based on keys and data types
+        schema = {}
         items = data[first_key]
         for item in items:
             item["__ingest_timestamp"] = datetime.now()
             for key in item:
                 if isinstance(item[key], dict):
                     item[key] = [item[key]]
-        return first_key, items
+                schema[key] = type(item[key]).__name__
+        return first_key, items, schema
     except json.JSONDecodeError as e:
-        return f"Ungültiger JSON-String: {str(e)}"
+        return f"Invalid JSON string: {str(e)}", None, None
     except Exception as e:
-        return f"Ein Fehler ist aufgetreten: {str(e)}"
+        return f"An error occurred: {str(e)}", None, None
