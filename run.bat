@@ -1,7 +1,7 @@
 @echo off
 SET "repoPath=C:\bai_integration_service_kies"
 SET "repoURL=https://github.com/fellnerd/bai_integration_service.git"
-SET "branchName=ssk-win-kies"
+SET "branchName=ssk-win-beton-01"
 
 IF EXIST "%repoPath%" (
     echo Removing existing directory at %repoPath%...
