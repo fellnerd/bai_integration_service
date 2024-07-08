@@ -20,6 +20,7 @@ def update_schema(schema_collection, schema_name, new_schema):
     
     return current_schema_data
 
+
 def apply_schema_defaults(item, schema):
     for key in schema:
         if key not in item:
