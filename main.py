@@ -67,6 +67,22 @@ def create_app(config=None):
                     "collection": category,
                     "total_items": len(data)
                 })
+
+                # Get the first document in the collection
+                first_document = collection.find_one()
+                if first_document:
+                    # Update first document with missing fields
+                    updated_fields = {}
+                    for key in current_schema:
+                        if key not in first_document:
+                            updated_fields[key] = ""
+
+                    if updated_fields:
+                        collection.update_one(
+                            {"_id": first_document["_id"]},
+                            {"$set": updated_fields}
+                        )
+
                 return jsonify({"message": "Data stored", "id": str(result.inserted_ids)})
 
         except Exception as e:
