@@ -17,7 +17,7 @@ def create_app(config=None):
     app.config.from_mapping(
         DEBUG=os.environ.get('DEBUG', 'True').lower() in ['true', '1', 't'],
         MONGO_URI="mongodb://localhost:27017/",
-        DATABASE_NAME='BAI_PROD_DB_KIES'
+        DATABASE_NAME='BAI_PROD_DB_BAUBETON'
         # ... any other configuration
     )
     if config:
@@ -94,4 +94,4 @@ def create_app(config=None):
 app = create_app()
 
 if __name__ == "__main__":
-    app.run(port=5002)
+    app.run(port=5003)
