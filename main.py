@@ -18,7 +18,7 @@ def create_app(config=None):
         DEBUG=os.environ.get('DEBUG', 'True').lower() in ['true', '1', 't'],
         MONGO_URI=os.environ.get(
             'MONGO_URI',
-            'mongodb://QlikSenseAdmin:QlikAdmin2026!@PPMC02p.salzburg.ssk.cc:27017/?tls=true&tlsCAFile=C:\\MongoDB\\certs\\ca-chain.crt&authSource=admin'
+            'mongodb://QlikSenseAdmin:Ql1ks3ns34dmin%21pa%24%24%25@PPMC02p.salzburg.ssk.cc:27017/?tls=true&tlsCAFile=C:\\MongoDB\\certs\\ca-chain.crt&authSource=admin'
         ),
         DATABASE_NAME=os.environ.get('DATABASE_NAME', 'BAI_PROD_DB_BAUBETON')
     )
